@@ -4,6 +4,7 @@ setup(
     name="rossmann_oltp",
     version="0.1",
     packages=find_packages(include=[
+        "rossmann_oltp",
         "rossmann_oltp.models",
         "rossmann_oltp.models.*"
     ]),
