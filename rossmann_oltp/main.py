@@ -29,7 +29,7 @@ def create_start_data():
         shop_b = create_shop_b(db, city_b)
         shop_c = create_shop_c(db, city_c)
         categories = create_categories(db)
-        create_products(db, categories, [shop_a, shop_b, shop_c])
+        create_products(db, categories, [city_a, city_b, city_c], [shop_a, shop_b, shop_c])
     finally:
         db.close()
     
@@ -175,34 +175,171 @@ def create_categories(db) -> dict[str, Category]:
     }
     return categories
 
-def create_products(db, city: City, categories: dict[str, Category], shops: list[Shop]):
-    create_products_baby(db, city, categories['Baby & Toys'], shops)
-    create_products_health(db, city, categories['Health'], shops)
-    create_products_household(db, city, categories['Household'], shops)
-    create_products_decor(db, city, categories['Decor'], shops)
-    create_products_care(db, city, categories['Care and fragrance'], shops)
+def create_products(db, categories: dict[str, Category], cities: list[City], shops: list[Shop]):
+    create_products_baby(db, categories['Baby & Toys'], cities, shops)
+    create_products_health(db, categories['Health'], cities, shops)
+    create_products_household(db, categories['Household'], cities, shops)
+    create_products_decor(db, categories['Decor'], cities, shops)
+    create_products_care(db, categories['Care and fragrance'], cities, shops)
 
-baby_products = {
-    'Set of 6 balancing stones': [
-        'A set of 6 balancing stones in different colors and shapes. Perfect for developing fine motor skills and creativity in children.',
-        'https://www.rossmann.de/media-neu/150/MAM_15035715/MAM_15035715_SHOP_IMAGE_1.4.png',
-    ],
-    'Water ball track': [
-        'A water ball track that allows children to play with water and balls. It helps develop hand-eye coordination and fine motor skills.',
-        'https://www.rossmann.de/media-neu/153/MAM_15369649/MAM_15369649_SHOP_IMAGE_1.4.png',
-    ],
-    'Foldable toilet seat duck': [
-        'A foldable toilet seat in the shape of a duck. It is easy to carry and use, making it perfect for potty training on the go.',
-        'https://www.rossmann.de/media-neu/152/MAM_15272272/MAM_15272272_SHOP_IMAGE_1.4.png',
-    ],
-    'Diapers Extra Soft Premium Junior Size 5 (11-16 kg)': [
-        'Extra soft diapers for children weighing 11-16 kg. They provide comfort and protection for your baby.',
-        'https://www.rossmann.de/media-neu/155/MAM_15565619/MAM_15565619_SHOP_IMAGE_1.4.png',
-    ],
-}
 
-def create_products_baby(db, cities: list[City], category: Category, shops: list[Shop]):
-    for name, (description, image_url) in baby_products.items():
+def create_products_baby(db, category: Category, cities: list[City], shops: list[Shop]):
+    baby_products = {
+        'Set of 6 balancing stones': (
+            'A set of 6 balancing stones in different colors and shapes. Perfect for developing fine motor skills and creativity in children.',
+            'https://www.rossmann.de/media-neu/150/MAM_15035715/MAM_15035715_SHOP_IMAGE_1.4.png',
+            {
+                'Berlin': (16.99, 0.1),
+                'Nurnberg': (15.99, 0.05),
+                'La Nucia': (14.99, 0.05),  
+            },
+        ),
+        'Water ball track': (
+            'A water ball track that allows children to play with water and balls. It helps develop hand-eye coordination and fine motor skills.',
+            'https://www.rossmann.de/media-neu/153/MAM_15369649/MAM_15369649_SHOP_IMAGE_1.4.png',
+            {
+                'Berlin': (9.99, 0),
+                'Nurnberg': (9.49, 0),
+                'La Nucia': (8.99, 0),
+            }
+        ),
+        'Foldable toilet seat duck': (
+            'A foldable toilet seat in the shape of a duck. It is easy to carry and use, making it perfect for potty training on the go.',
+            'https://www.rossmann.de/media-neu/152/MAM_15272272/MAM_15272272_SHOP_IMAGE_1.4.png',
+            {
+                'Berlin': (7.99, 0.2),
+                'Nurnberg': (7.99, 0.2),
+                'La Nucia': (7.49, 0.1),
+            }
+        ),
+        'Diapers Extra Soft Premium Junior Size 5 (11-16 kg)': (
+            'Extra soft diapers for children weighing 11-16 kg. They provide comfort and protection for your baby.',
+            'https://www.rossmann.de/media-neu/155/MAM_15565619/MAM_15565619_SHOP_IMAGE_1.4.png',
+            {
+                'Berlin': (12.99, 0.1),
+                'Nurnberg': (11.99, 0.1),
+                'La Nucia': (10.99, 0.05),
+            }
+        ),
+    }
+    add_products(db, baby_products, category, cities, shops)
+    
+def create_products_health(db, category: Category, cities: list[City], shops: list[Shop]):
+    health_products = {
+        'Super-Haftcreme Neutral': (
+            'Super adhesive cream for dentures. Provides a strong hold and comfort for denture wearers.',
+            'https://www.rossmann.de/media-neu/159/MAM_15920344/MAM_15920344_SHOP_IMAGE_1.4.png',
+            {
+                'Berlin': (1.59, 0),
+                'Nurnberg': (1.59, 0),
+                'La Nucia': (1.59, 0.1),
+            }
+        ),
+        'EZB 6100 Electric Toothbrush': (
+            'An electric toothbrush with a 2-minute timer and 30-second interval timer. It helps you brush your teeth effectively.',
+            'https://www.rossmann.de/media-neu/160/MAM_16022592/MAM_16022592_SHOP_IMAGE_1.4.png',
+            {
+                'Berlin': (89.99, 0.05),
+                'Nurnberg': (84.99, 0.1),
+                'La Nucia': (79.99, 0),
+            }
+        ),
+        'Rapid Alcohol Test': (
+            'A rapid alcohol test that provides quick results. It is easy to use and helps you check your blood alcohol level.',
+            'https://www.rossmann.de/media-neu/160/MAM_16033331/MAM_16033331_SHOP_IMAGE_1.4.png',
+            {
+                'Berlin': (6.99, 0),
+                'Nurnberg': (6.99, 0),
+                'La Nucia': (6.49, 0),
+            }
+        ),
+    }
+    add_products(db, health_products, category, cities, shops)
+  
+def create_products_household(db, category: Category, cities: list[City], shops: list[Shop]):
+    household_products = {
+        'Universal detergent liquid fresh cotton blossom 20 WL': (
+            'A universal detergent liquid with a fresh cotton blossom scent. It is suitable for all types of fabrics and provides a deep clean.',
+            'https://www.rossmann.de/media-neu/159/MAM_15914468/MAM_15914468_SHOP_IMAGE_1.4.png',
+            {
+                'Berlin': (5.49, 0),
+                'Nurnberg': (5.49, 0),
+                'La Nucia': (4.99, 0.1),
+            }
+        ),
+        'Fabric softener concentrate Aprilfrisch 59 WL': (
+            'A fabric softener concentrate with an April fresh scent. It provides long-lasting freshness and softness to your laundry.',
+            'https://www.rossmann.de/media-neu/158/MAM_15880260/MAM_15880260_SHOP_IMAGE_1.4.png',
+            {
+                'Berlin': (3.29, 0),
+                'Nurnberg': (3.29, 0),
+                'La Nucia': (2.99, 0),
+            }
+        ),
+        'All-purpose cleaner spray bathroom': (
+            'An all-purpose cleaner spray for the bathroom. It effectively removes dirt and limescale, leaving your bathroom clean and fresh.',
+            'https://www.rossmann.de/media-neu/160/MAM_16063656/MAM_16063656_SHOP_IMAGE_1.4.png',
+            {
+                'Berlin': (3.29, 0),
+                'Nurnberg': (3.29, 0),
+                'La Nucia': (2.99, 0.05),
+            }
+        ),
+    }
+    add_products(db, household_products, category, cities, shops)
+          
+def create_products_decor(db, category: Category, cities: list[City], shops: list[Shop]):
+    decor_products = {
+        'PopGrip Premium Glitter Rainbow Void': (
+            'A PopGrip with a premium glitter design. It provides a secure grip for your phone and can be used as a stand.',
+            'https://www.rossmann.de/media-neu/162/MAM_16258211/MAM_16258211_SHOP_IMAGE_1.4.png',
+            {
+                'Berlin': (17.99, 0),
+                'Nurnberg': (16.99, 0),
+                'La Nucia': (16.99, 0),
+            }
+        ),
+        'LED starry sky light green': (
+            'A LED light that creates a starry sky effect. It is perfect for creating a relaxing atmosphere in your home.',
+            'https://www.rossmann.de/media-neu/161/MAM_16141130/MAM_16141130_SHOP_IMAGE_2.3.png',
+            {
+                'Berlin': (7.99, 0),
+                'Nurnberg': (7.99, 0),
+                'La Nucia': (7.99, 0.1),
+            }
+        ),
+    }
+    add_products(db, decor_products, category, cities, shops)
+    
+def create_products_care(db, category: Category, cities: list[City], shops: list[Shop]):
+    care_products = {
+        'Beauty Scrub Blueberry Caramel Bliss': (
+            'A beauty scrub with a blueberry caramel scent. It exfoliates and nourishes your skin',
+            'https://www.rossmann.de/media-neu/159/MAM_15986768/MAM_15986768_SHOP_IMAGE_1.4.png',
+            {
+                'Berlin': (7.99, 0.35),
+                'Nurnberg': (7.49, 0.35),
+                'La Nucia': (6.99, 0.3),
+            }
+        ),
+        'Anti-Gray Effect Coloring Conditioner': (
+            'A coloring conditioner that helps reduce gray hair. It provides a natural color and shine to your hair.',
+            'https://www.rossmann.de/media-neu/158/MAM_15852682/MAM_15852682_SHOP_IMAGE_1.4.png',
+            {
+                'Berlin': (15.99, 0.2),
+                'Nurnberg': (13.99, 0.2),
+                'La Nucia': (12.99, 0.25),
+            }
+        ),
+    }
+    add_products(db, care_products, category, cities, shops)
+
+def add_products(db, 
+                 map_products: dict[str, tuple[str, str, dict[str, tuple[float, float]]]], 
+                 category: Category, 
+                 cities: list[City], 
+                 shops: list[Shop]):
+    for name, (description, image_url, map_price) in map_products.items():
         product = create_product(
             db=db,
             name=name,
@@ -211,174 +348,9 @@ def create_products_baby(db, cities: list[City], category: Category, shops: list
             image_url=image_url   
         )
         for city in cities:
-            if city.city_name == 'Germany':
-                price_map = {
-                    'Set of 6 balancing stones': (16.99, 0.1),
-                    'Water ball track': (9.99, 0),
-                    'Foldable toilet seat duck': (7.99, 0.2),
-                    'Diapers Extra Soft Premium Junior Size 5 (11-16 kg)': (12.99, 0.1)
-                }
-                add_product_to_city(db, product, city, price_map[name][0], price_map[name][1])
+            add_product_to_city(db, product, city, map_price[city.city_name][0], map_price[city.city_name][1])
         for shop in shops:
             add_product_to_shop(db, product, shop, random.randrange(50, 200, 10)) 
-
-def create_products_baby(db, city: City, category: Category,  shops: list[Shop]):
-    product = create_product(
-        db=db,
-        name='Set of 6 balancing stones',
-        description='A set of 6 balancing stones in different colors and shapes. Perfect for developing fine motor skills and creativity in children.',
-        category=category,
-        image_url='https://www.rossmann.de/media-neu/150/MAM_15035715/MAM_15035715_SHOP_IMAGE_1.4.png'
-    )
-    add_product_to_city(db, product, city, 16.99, 0.1)
-    
-    add_product_to_shop(db, product, shops[0], 200, 16.99, 0.1)
-    add_product_to_shop(db, product, shops[1], 150, 16.99)
-    add_product_to_shop(db, product, shops[2], 100, 14.99, 0.05)
-
-    
-    product = create_product(
-        db=db,
-        name='Water ball track',
-        description='A water ball track that allows children to play with water and balls. It helps develop hand-eye coordination and fine motor skills.',
-        category=category,
-        image_url='https://www.rossmann.de/media-neu/153/MAM_15369649/MAM_15369649_SHOP_IMAGE_1.4.png'  
-    )
-    add_product_to_shop(db, product, shops[0], 100, 9.99)
-    add_product_to_shop(db, product, shops[1], 80, 9.49, 0.2)
-    add_product_to_shop(db, product, shops[2], 120, 8.99)
-
-    product = create_product(
-        db=db,
-        name='Foldable toilet seat duck',
-        description='A foldable toilet seat in the shape of a duck. It is easy to carry and use, making it perfect for potty training on the go.',
-        category=category,
-        image_url='https://www.rossmann.de/media-neu/152/MAM_15272272/MAM_15272272_SHOP_IMAGE_1.4.png'
-    )
-    add_product_to_shop(db, product, shops[0], 300, 7.99, 0.4)
-    add_product_to_shop(db, product, shops[1], 250, 7.99, 0.4)
-    add_product_to_shop(db, product, shops[2], 200, 7.49, 0.3)
-
-
-    product = create_product(
-        db=db,
-        name='Diapers Extra Soft Premium Junior Size 5 (11-16 kg)',
-        description='Extra soft diapers for children weighing 11-16 kg. They provide comfort and protection for your baby.',
-        category=category,
-        image_url='https://www.rossmann.de/media-neu/155/MAM_15565619/MAM_15565619_SHOP_IMAGE_1.4.png'
-    )
-    add_product_to_shop(db, product, shops[0], 80, 12.99)
-    add_product_to_shop(db, product, shops[1], 50, 12.49)
-    add_product_to_shop(db, product, shops[2], 60, 10.99)
-def create_products_health(db, category: Category, shops: list[Shop]):
-    product = create_product(
-        db=db,
-        name='Super-Haftcreme Neutral',
-        description='Super adhesive cream for dentures. Provides a strong hold and comfort for denture wearers.',
-        category=category,
-        image_url='https://www.rossmann.de/media-neu/159/MAM_15920344/MAM_15920344_SHOP_IMAGE_1.4.png'
-    )
-    add_product_to_shop(db, product, shops[0], 200, 1.59, 0.1)
-    add_product_to_shop(db, product, shops[1], 150, 1.59, 0.1)
-    add_product_to_shop(db, product, shops[2], 100, 1.59)
-    
-    product = create_product(
-        db=db,
-        name='EZB 6100 Electric Toothbrush',
-        description='An electric toothbrush with a 2-minute timer and 30-second interval timer. It helps you brush your teeth effectively.',
-        category=category,
-        image_url='https://www.rossmann.de/media-neu/160/MAM_16022592/MAM_16022592_SHOP_IMAGE_1.4.png'
-    )
-    add_product_to_shop(db, product, shops[0], 150, 89.99, 0.05)
-    add_product_to_shop(db, product, shops[1], 120, 85.99)
-    add_product_to_shop(db, product, shops[2], 200, 79.99)
-    
-    product = create_product(
-        db=db,
-        name='Rapid Alcohol Test',
-        description='A rapid alcohol test that provides quick results. It is easy to use and helps you check your blood alcohol level.',
-        category=category,
-        image_url='https://www.rossmann.de/media-neu/160/MAM_16033331/MAM_16033331_SHOP_IMAGE_1.4.png'
-    )
-    add_product_to_shop(db, product, shops[0], 300, 6.99)
-    add_product_to_shop(db, product, shops[1], 250, 6.99)
-    add_product_to_shop(db, product, shops[2], 280, 6.49)  
-def create_products_household(db, category: Category, shops: list[Shop]):
-    product = create_product(
-        db=db,
-        name='Universal detergent liquid fresh cotton blossom 20 WL',
-        description='A universal detergent liquid with a fresh cotton blossom scent. It is suitable for all types of fabrics and provides a deep clean.',
-        category=category,
-        image_url='https://www.rossmann.de/media-neu/159/MAM_15914468/MAM_15914468_SHOP_IMAGE_1.4.png'
-    )
-    add_product_to_shop(db, product, shops[0], 50, 5.49)
-    add_product_to_shop(db, product, shops[1], 40, 5.49)
-    add_product_to_shop(db, product, shops[2], 40, 4.99)
-    
-    product = create_product(
-        db=db,
-        name='Fabric softener concentrate Aprilfrisch 59 WL',
-        description='A fabric softener concentrate with an April fresh scent. It provides long-lasting freshness and softness to your laundry.',
-        category=category,
-        image_url='https://www.rossmann.de/media-neu/158/MAM_15880260/MAM_15880260_SHOP_IMAGE_1.4.png'
-    )
-    add_product_to_shop(db, product, shops[0], 80, 3.29)
-    add_product_to_shop(db, product, shops[1], 50, 2.99)
-    add_product_to_shop(db, product, shops[2], 60, 2.99, 0.1)
-    
-    product = create_product(
-        db=db,
-        name='All-purpose cleaner spray bathroom',
-        description='An all-purpose cleaner spray for the bathroom. It effectively removes dirt and limescale, leaving your bathroom clean and fresh.',
-        category=category,
-        image_url='https://www.rossmann.de/media-neu/160/MAM_16063656/MAM_16063656_SHOP_IMAGE_1.4.png'   
-    )
-    add_product_to_shop(db, product, shops[0], 80, 3.29)
-    add_product_to_shop(db, product, shops[1], 50, 2.99)
-    add_product_to_shop(db, product, shops[2], 60, 2.99, 0.05)
-def create_products_decor(db, category: Category, shops: list[Shop]):
-    product = create_product(
-        db=db,
-        name='PopGrip Premium Glitter Rainbow Void',
-        description='A PopGrip with a premium glitter design. It provides a secure grip for your phone and can be used as a stand.',
-        category=category,
-        image_url='https://www.rossmann.de/media-neu/162/MAM_16258211/MAM_16258211_SHOP_IMAGE_1.4.png'
-    )
-    add_product_to_shop(db, product, shops[0], 30, 17.99)
-    add_product_to_shop(db, product, shops[1], 20, 17.99)
-    add_product_to_shop(db, product, shops[2], 25, 16.99)
-    
-    product = create_product(
-        db=db,
-        name='LED starry sky light green',
-        description='A LED light that creates a starry sky effect. It is perfect for creating a relaxing atmosphere in your home.',
-        category=category,
-        image_url='https://www.rossmann.de/media-neu/161/MAM_16141130/MAM_16141130_SHOP_IMAGE_2.3.png'
-    )
-    add_product_to_shop(db, product, shops[0], 50, 7.99, 0.1)
-    add_product_to_shop(db, product, shops[1], 40, 7.99, 0.1)
-def create_products_care(db, category: Category, shops: list[Shop]):
-    product = create_product(
-        db=db,
-        name='Beauty Scrub Blueberry Caramel Bliss',
-        description='A beauty scrub with a blueberry caramel scent. It exfoliates and nourishes your skin',
-        category=category,
-        image_url='https://www.rossmann.de/media-neu/159/MAM_15986768/MAM_15986768_SHOP_IMAGE_1.4.png'
-    )
-    add_product_to_shop(db, product, shops[0], 200, 7.95, 0.35)
-    add_product_to_shop(db, product, shops[1], 150, 7.49, 0.3)
-    add_product_to_shop(db, product, shops[2], 120, 6.99, 0.35)
-    
-    product = create_product(
-        db=db,
-        name='Anti-Gray Effect Coloring Conditioner',
-        description='A coloring conditioner that helps reduce gray hair. It provides a natural color and shine to your hair.',
-        category=category,
-        image_url='https://www.rossmann.de/media-neu/158/MAM_15852682/MAM_15852682_SHOP_IMAGE_1.4.png'
-    )
-    add_product_to_shop(db, product, shops[0], 150, 15.99, 0.2)
-    add_product_to_shop(db, product, shops[1], 120, 14.99, 0.2)
-    add_product_to_shop(db, product, shops[2], 140, 12.99, 0.25)
 
 
 if __name__ == '__main__':

@@ -13,3 +13,4 @@ class City(Base):
     
     country = relationship("Country", back_populates="cities")
     products = relationship("CityProduct", back_populates="city")
+    shops = relationship("Shop", back_populates="city")

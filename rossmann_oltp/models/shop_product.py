@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import Integer, ForeignKey, Index
 
-from rossmann_oltp.models import SyncBase
+from rossmann_oltp.models import Base
 
 
-class ShopProduct(SyncBase):
+class ShopProduct(Base):
     __tablename__ = "shop_products"
     
     shop_id: Mapped[int] = mapped_column(Integer, ForeignKey("shops.shop_id"), primary_key=True)
@@ -13,7 +13,3 @@ class ShopProduct(SyncBase):
     
     shop = relationship("Shop", back_populates="products")
     product = relationship("Product", back_populates="shops")
-
-    __table_args__ = (
-        Index(f'ix_shop_product_sync', 'last_updated_utc'),
-    )
