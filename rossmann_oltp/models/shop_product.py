@@ -9,8 +9,6 @@ class ShopProduct(SyncBase):
     
     shop_id: Mapped[int] = mapped_column(Integer, ForeignKey("shops.shop_id"), primary_key=True)
     product_id: Mapped[int] = mapped_column(Integer, ForeignKey("products.product_id"), primary_key=True)
-    price: Mapped[float] 
-    discount: Mapped[float] = mapped_column(default=0.0)
     stock_quantity: Mapped[int]
     
     shop = relationship("Shop", back_populates="products")

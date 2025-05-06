@@ -1,4 +1,4 @@
-from sqlalchemy import String
+from sqlalchemy import String, Integer, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from rossmann_oltp.models import Base
@@ -8,9 +8,8 @@ class Shop(Base):
     __tablename__ = "shops"
 
     shop_id: Mapped[int] = mapped_column(primary_key=True)
-    country: Mapped[str] = mapped_column(String(50))
-    city: Mapped[str] = mapped_column(String(50))
+    city_id: Mapped[int] = mapped_column(Integer, ForeignKey("cities.city_id"))
     address: Mapped[str] = mapped_column(String(100))
     
-    employees = relationship("ShopEmployee", back_populates="shop")
+    employees = relationship("Employee", back_populates="shop")
     products = relationship("ShopProduct", back_populates="shop")

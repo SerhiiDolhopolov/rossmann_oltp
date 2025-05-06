@@ -2,7 +2,8 @@ import random
 
 from sqlalchemy.orm import Session
 
-from rossmann_oltp.models import Category, Product, Shop, ShopProduct
+from rossmann_oltp.models import Category, Shop, City
+from rossmann_oltp.models import Product, CityProduct, ShopProduct
 
 
 def create_category(db: Session, name: str, description: str = None):
@@ -28,18 +29,31 @@ def create_product(db: Session,
     db.refresh(product)
     return product
 
+def add_product_to_city(db: Session,
+                        product: Product,
+                        city: City,
+                        price: float,
+                        discount: float = 0) -> CityProduct:
+    city_product = CityProduct(
+        city=city,
+        product=product,
+        price=price,
+        discount=discount
+    )
+    db.add(city_product)
+    db.commit()
+    db.refresh(city_product)
+    return city_product
+
+
 def add_product_to_shop(db: Session,
                         product: Product,
                         shop: Shop,
-                        stock_quantity: int,
-                        price: float,
-                        discount: float = 0):
+                        stock_quantity: int) -> ShopProduct:
     shop_product = ShopProduct(
         shop=shop,
         product=product,
-        price=price,
         stock_quantity=stock_quantity,
-        discount=discount
     )
     db.add(shop_product)    
     db.commit()

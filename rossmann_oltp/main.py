@@ -1,9 +1,12 @@
+import random
+
 from db import init_db, get_db
-from services.shop_service import create_shop
+from services.location_service import create_country, create_city, create_shop
 from services.employee_service import create_employee
-from services.product_service import create_product, create_category, add_product_to_shop
+from services.product_service import create_product, create_category
+from services.product_service import add_product_to_city, add_product_to_shop
 from employee_role import EmployeeRole
-from rossmann_oltp.models import Category, Shop
+from rossmann_oltp.models import Category, Shop, City
 
 
 def main():
@@ -15,15 +18,22 @@ def create_start_data():
     try:
         if db.query(Shop).count() > 0:
             return
-        shop_a = create_shop_a(db)
-        shop_b = create_shop_b(db)
-        shop_c = create_shop_c(db)
+        
+        country_a_b = create_country(db, 'Germany')
+        country_c = create_country(db, 'Spain')
+        city_a = create_city(db, country_a_b, 'Berlin')
+        city_b = create_city(db, country_a_b, 'Nurnberg')
+        city_c = create_city(db, country_c, 'La Nucia')
+        
+        shop_a = create_shop_a(db, city_a)
+        shop_b = create_shop_b(db, city_b)
+        shop_c = create_shop_c(db, city_c)
         categories = create_categories(db)
         create_products(db, categories, [shop_a, shop_b, shop_c])
     finally:
         db.close()
     
-def create_shop_a(db) -> Shop:
+def create_shop_a(db, city: City) -> Shop:
     employees = [
         create_employee(
             db=db,
@@ -56,12 +66,11 @@ def create_shop_a(db) -> Shop:
     ]
     return create_shop(
         db=db,
-        country='Germany',
-        city='Berlin',
+        city=city,
         address='Am Ostbahnhof 9/1.03 Ostbahnhof 10243 Berlin Friedrichshain',
         employees=employees
     )
-def create_shop_b(db) -> Shop:
+def create_shop_b(db, city: City) -> Shop:
     employees = [
         create_employee(
             db=db,
@@ -94,12 +103,11 @@ def create_shop_b(db) -> Shop:
     ]
     return create_shop(
         db=db,
-        country='Germany',
-        city='Nurnberg',
+        city=city,
         address='Rothenburger Str. 143 90439 Nürnberg St. Leonhard',
         employees=employees
     )   
-def create_shop_c(db) -> Shop:
+def create_shop_c(db, city: City) -> Shop:
     employees = [
         create_employee(
             db=db,
@@ -132,8 +140,7 @@ def create_shop_c(db) -> Shop:
     ]
     return create_shop(
         db=db,
-        country='Spain',
-        city='La Nucia',
+        city=city,
         address='Av. Sorolla, s/n, 03530 La Nucia, Alicante',
         employees=employees
     )
@@ -168,14 +175,54 @@ def create_categories(db) -> dict[str, Category]:
     }
     return categories
 
-def create_products(db, categories: dict[str, Category], shops: list[Shop]):
-    create_products_baby(db, categories['Baby & Toys'], shops)
-    create_products_health(db, categories['Health'], shops)
-    create_products_household(db, categories['Household'], shops)
-    create_products_decor(db, categories['Decor'], shops)
-    create_products_care(db, categories['Care and fragrance'], shops)
+def create_products(db, city: City, categories: dict[str, Category], shops: list[Shop]):
+    create_products_baby(db, city, categories['Baby & Toys'], shops)
+    create_products_health(db, city, categories['Health'], shops)
+    create_products_household(db, city, categories['Household'], shops)
+    create_products_decor(db, city, categories['Decor'], shops)
+    create_products_care(db, city, categories['Care and fragrance'], shops)
 
-def create_products_baby(db, category: Category, shops: list[Shop]):
+baby_products = {
+    'Set of 6 balancing stones': [
+        'A set of 6 balancing stones in different colors and shapes. Perfect for developing fine motor skills and creativity in children.',
+        'https://www.rossmann.de/media-neu/150/MAM_15035715/MAM_15035715_SHOP_IMAGE_1.4.png',
+    ],
+    'Water ball track': [
+        'A water ball track that allows children to play with water and balls. It helps develop hand-eye coordination and fine motor skills.',
+        'https://www.rossmann.de/media-neu/153/MAM_15369649/MAM_15369649_SHOP_IMAGE_1.4.png',
+    ],
+    'Foldable toilet seat duck': [
+        'A foldable toilet seat in the shape of a duck. It is easy to carry and use, making it perfect for potty training on the go.',
+        'https://www.rossmann.de/media-neu/152/MAM_15272272/MAM_15272272_SHOP_IMAGE_1.4.png',
+    ],
+    'Diapers Extra Soft Premium Junior Size 5 (11-16 kg)': [
+        'Extra soft diapers for children weighing 11-16 kg. They provide comfort and protection for your baby.',
+        'https://www.rossmann.de/media-neu/155/MAM_15565619/MAM_15565619_SHOP_IMAGE_1.4.png',
+    ],
+}
+
+def create_products_baby(db, cities: list[City], category: Category, shops: list[Shop]):
+    for name, (description, image_url) in baby_products.items():
+        product = create_product(
+            db=db,
+            name=name,
+            description=description,
+            category=category,
+            image_url=image_url   
+        )
+        for city in cities:
+            if city.city_name == 'Germany':
+                price_map = {
+                    'Set of 6 balancing stones': (16.99, 0.1),
+                    'Water ball track': (9.99, 0),
+                    'Foldable toilet seat duck': (7.99, 0.2),
+                    'Diapers Extra Soft Premium Junior Size 5 (11-16 kg)': (12.99, 0.1)
+                }
+                add_product_to_city(db, product, city, price_map[name][0], price_map[name][1])
+        for shop in shops:
+            add_product_to_shop(db, product, shop, random.randrange(50, 200, 10)) 
+
+def create_products_baby(db, city: City, category: Category,  shops: list[Shop]):
     product = create_product(
         db=db,
         name='Set of 6 balancing stones',
@@ -183,6 +230,8 @@ def create_products_baby(db, category: Category, shops: list[Shop]):
         category=category,
         image_url='https://www.rossmann.de/media-neu/150/MAM_15035715/MAM_15035715_SHOP_IMAGE_1.4.png'
     )
+    add_product_to_city(db, product, city, 16.99, 0.1)
+    
     add_product_to_shop(db, product, shops[0], 200, 16.99, 0.1)
     add_product_to_shop(db, product, shops[1], 150, 16.99)
     add_product_to_shop(db, product, shops[2], 100, 14.99, 0.05)

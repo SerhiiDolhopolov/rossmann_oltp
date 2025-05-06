@@ -1,7 +1,9 @@
 from .base import Base, SyncBase
-from .employee import Employee
+from .country import Country
+from .city import City
 from .shop import Shop
-from .shop_product import ShopProduct
-from .product import Product
+from .employee import Employee
 from .category import Category
-from .shop_employee import ShopEmployee
+from .product import Product
+from .shop_product import ShopProduct
+from .city_product import CityProduct
