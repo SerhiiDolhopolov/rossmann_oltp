@@ -7,6 +7,7 @@ setup(
         "rossmann_oltp.models",
         "rossmann_oltp.models.*",
         "rossmann_oltp.employee_role",
+        "rossmann_oltp.employee_role.*"
     ]),
     install_requires=[line.strip() for line in open("requirements.txt") if line.strip() and not line.startswith("#")],
 )
