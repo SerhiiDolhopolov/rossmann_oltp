@@ -1,0 +1,29 @@
+services:
+  adminer:
+    container_name: oltp_adminer
+    depends_on:
+      - db
+    image: adminer
+    restart: always
+    ports:
+      - 2000:8080
+  db:
+    container_name: oltp_db
+    image: postgres:latest
+    restart: always
+    ports:
+      - 2001:5432
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+  app:
+    container_name: oltp_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    depends_on:
+      - db
