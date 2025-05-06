@@ -1,7 +1,7 @@
 from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from models import Base
+from rossmann_oltp.models import Base
 
 
 class Shop(Base):

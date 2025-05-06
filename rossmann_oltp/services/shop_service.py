@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from models import Shop, Employee, ShopEmployee
+from rossmann_oltp.models import Shop, Employee, ShopEmployee
 
 
 def create_shop(db: Session,

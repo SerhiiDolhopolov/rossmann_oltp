@@ -2,7 +2,7 @@ import random
 
 from sqlalchemy.orm import Session
 
-from models import Category, Product, Shop, ShopProduct
+from rossmann_oltp.models import Category, Product, Shop, ShopProduct
 
 
 def create_category(db: Session, name: str, description: str = None):

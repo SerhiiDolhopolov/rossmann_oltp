@@ -4,7 +4,7 @@ import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from models import Base
+from rossmann_oltp.models import Base
 
 
 load_dotenv()

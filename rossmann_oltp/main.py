@@ -3,7 +3,7 @@ from services.shop_service import create_shop
 from services.employee_service import create_employee
 from services.product_service import create_product, create_category, add_product_to_shop
 from employee_role import EmployeeRole
-from models import Category, Shop
+from rossmann_oltp.models import Category, Shop
 
 
 def main():

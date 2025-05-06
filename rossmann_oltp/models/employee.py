@@ -3,7 +3,7 @@ from datetime import date
 from sqlalchemy import String, UUID, Index
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from models import SyncBase
+from rossmann_oltp.models import SyncBase
 
 
 class Employee(SyncBase):
