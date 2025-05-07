@@ -14,7 +14,6 @@ def create_employee(db: Session,
                     role: EmployeeRole,
                     salary: float,
                     ) -> Employee:
-    employee_uuid = uuid.uuid4()
     birth_date = date.today() - timedelta(days=random.randint(20, 60) * 365)
     hire_date = date.today() - timedelta(days=random.randint(0, 365*5))
     phone = '+15454545454'
@@ -23,7 +22,6 @@ def create_employee(db: Session,
     
     
     employee = Employee(
-        employee_uuid=employee_uuid,
         first_name=first_name,
         last_name=last_name,
         birth_date=birth_date,

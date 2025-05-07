@@ -21,7 +21,7 @@ async def authorize_employee(email: EmailStr,
         raise HTTPException(status_code=404, detail="Employee not found")
     if employee.password != password:
         raise HTTPException(status_code=401, detail="Invalid password")
-    employee_schema = EmployeeSchema(employee_uuid=employee.employee_uuid,
+    employee_schema = EmployeeSchema(employee_id=employee.employee_id,
                                      first_name=employee.first_name,
                                      last_name=employee.last_name,
                                      role=employee.role)

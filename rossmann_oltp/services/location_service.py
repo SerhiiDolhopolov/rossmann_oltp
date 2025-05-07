@@ -1,7 +1,13 @@
 from sqlalchemy.orm import Session
 
-from rossmann_oltp.models import Country, City, Shop, Employee
+from rossmann_oltp.models import Country, City, Shop, Employee, Terminal
 
+def create_terminal(db: Session, shop: Shop) -> Terminal:
+    terminal = Terminal(shop=shop, password='password')
+    db.add(terminal)
+    db.commit()
+    db.refresh(terminal)
+    return terminal
 
 def create_country(db: Session, name: str) -> Country:
     country = Country(country_name=name)
@@ -24,7 +30,7 @@ def create_shop(db: Session,
     shop = Shop(city=city, address=address, password='password')    
     if employees:
         for employee in employees:
-            db.add(employee)
+            employee.shop = shop
 
     db.add(shop)
     db.commit()

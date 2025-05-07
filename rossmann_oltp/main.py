@@ -1,7 +1,5 @@
-import random
-
 from db import init_db, get_db
-from services.location_service import create_country, create_city, create_shop
+from services.location_service import create_country, create_city, create_shop, create_terminal
 from services.employee_service import create_employee
 from services.product_service import create_product, create_category
 from services.product_service import add_product_to_city, add_product_to_shop
@@ -36,10 +34,17 @@ def create_start_data():
         shop_b = create_shop_b(db, city_b)
         shop_c = create_shop_c(db, city_c)
         categories = create_categories(db)
-        create_products(db, categories, [city_a, city_b, city_c], [shop_a, shop_b, shop_c])
+        shops = [shop_a, shop_b, shop_c]
+        for shop in shops:
+            for i in range(1, 4):
+                create_terminal(
+                    db=db,
+                    shop=shop)
+        cities = [city_a, city_b, city_c]
+        create_products(db, categories, cities, shops)
     finally:
         db.close()
-    
+
 def create_shop_a(db, city: City) -> Shop:
     employees = [
         create_employee(
