@@ -29,10 +29,22 @@ services:
     container_name: oltp_app
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.oltp
     volumes:
       - .:/app
     depends_on:
       db:
         condition: service_healthy
+
+  api:
+    container_name: oltp_sync_api
+    build:
+      context: .
+      dockerfile: Dockerfile.sync_api
+    volumes:
+      - .:/app
+    ports:
+      - 2002:8000
+    depends_on:
+      - app
 

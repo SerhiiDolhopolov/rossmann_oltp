@@ -9,4 +9,4 @@ COPY . .
 
 ENV PYTHONPATH=/app
 
-CMD ["python", "rossmann_oltp/main.py"]
+CMD ["python", "-u", "rossmann_oltp/main.py"]

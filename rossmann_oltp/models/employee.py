@@ -24,7 +24,3 @@ class Employee(SyncBase):
 
     
     shop = relationship('Shop', back_populates="employees")
-
-    __table_args__ = (
-        Index(f'ix_employee_sync', 'last_updated_utc'),
-    )

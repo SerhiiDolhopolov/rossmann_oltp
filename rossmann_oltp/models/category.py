@@ -12,7 +12,3 @@ class Category(SyncBase):
     description: Mapped[str] = mapped_column(String(2048), nullable=True)
         
     products = relationship("Product", back_populates="category")
-    
-    __table_args__ = (
-        Index(f'ix_category_sync', 'last_updated_utc'),
-    )

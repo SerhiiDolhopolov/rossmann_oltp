@@ -14,7 +14,3 @@ class CityProduct(SyncBase):
     
     city = relationship("City", back_populates="products")
     product = relationship("Product", back_populates="cities")
-
-    __table_args__ = (
-        Index(f'ix_city_product_sync', 'last_updated_utc'),
-    )

@@ -25,6 +25,13 @@ def create_start_data():
         city_b = create_city(db, country_a_b, 'Nurnberg')
         city_c = create_city(db, country_c, 'La Nucia')
         
+        create_employee(
+            db=db,
+            first_name='Ramsay',
+            last_name='Bolton',
+            role=EmployeeRole.COURIER,
+            salary=800       
+        )
         shop_a = create_shop_a(db, city_a)
         shop_b = create_shop_b(db, city_b)
         shop_c = create_shop_c(db, city_c)
@@ -350,7 +357,7 @@ def add_products(db,
         for city in cities:
             add_product_to_city(db, product, city, map_price[city.city_name][0], map_price[city.city_name][1])
         for shop in shops:
-            add_product_to_shop(db, product, shop, random.randrange(50, 200, 10)) 
+            add_product_to_shop(db, product, shop, 0) 
 
 
 if __name__ == '__main__':

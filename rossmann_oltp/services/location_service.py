@@ -21,7 +21,7 @@ def create_shop(db: Session,
                 city: City, 
                 address: str, 
                 employees: list[Employee] = None) -> Shop:
-    shop = Shop(city=city, address=address)    
+    shop = Shop(city=city, address=address, password='password')    
     if employees:
         for employee in employees:
             db.add(employee)

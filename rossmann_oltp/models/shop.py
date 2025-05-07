@@ -10,6 +10,7 @@ class Shop(Base):
     shop_id: Mapped[int] = mapped_column(primary_key=True)
     city_id: Mapped[int] = mapped_column(Integer, ForeignKey("cities.city_id"))
     address: Mapped[str] = mapped_column(String(100))
+    password: Mapped[str] = mapped_column(String(100))
     
     employees = relationship("Employee", back_populates="shop")
     products = relationship("ShopProduct", back_populates="shop")
