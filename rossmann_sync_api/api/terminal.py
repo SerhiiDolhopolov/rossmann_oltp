@@ -9,7 +9,7 @@ router = APIRouter(prefix="/terminals", tags=["terminals"])
 
 @router.get('/get_available', response_model=list[int])
 async def get_id_available_terminals(shop_id: int, 
-                                  db: Session = Depends(get_db)):
+                                     db: Session = Depends(get_db)):
     terminals = db.query(Terminal) \
                   .filter(Terminal.shop_id == shop_id) \
                   .all()
