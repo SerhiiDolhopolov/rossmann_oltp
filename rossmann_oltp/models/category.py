@@ -9,6 +9,6 @@ class Category(SyncBase):
 
     category_id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(255))
-    description: Mapped[str] = mapped_column(String(2048), nullable=True)
+    description: Mapped[str | None] = mapped_column(String(2048), nullable=True)
         
     products = relationship("Product", back_populates="category")
