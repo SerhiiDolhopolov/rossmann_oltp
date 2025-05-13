@@ -9,5 +9,8 @@ setup(
         "sync_schemas",
         "sync_schemas.*",
     ]),
-    install_requires=[line.strip() for line in open("requirements.txt") if line.strip() and not line.startswith("#")],
+    install_requires=[
+        "fastapi",
+        "sqlalchemy"
+    ]
 )

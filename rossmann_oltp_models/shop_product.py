@@ -4,7 +4,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy import Integer, ForeignKey
 
 from rossmann_oltp_models import Base
-from rossmann_oltp.config import DATE_TIME_FORMAT
+from rossmann_oltp_models.config import DATE_TIME_FORMAT
 
 
 class ShopProduct(Base):
