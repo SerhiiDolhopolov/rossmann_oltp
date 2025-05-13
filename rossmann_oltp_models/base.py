@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from sqlalchemy.ext.declarative import as_declarative
 from sqlalchemy.orm import Mapped, mapped_column
 
-from rossmann_oltp.config import DATE_TIME_FORMAT
+from rossmann_oltp_models.config import DATE_TIME_FORMAT
 
 @as_declarative()
 class Base:
