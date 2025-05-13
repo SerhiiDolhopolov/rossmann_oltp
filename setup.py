@@ -5,7 +5,7 @@ setup(
     version="0.3",
     packages=find_packages(include=[
         "rossmann_oltp_models",
-        "rossmann_oltp_models.*"
+        "rossmann_oltp_models.*",
         "rossmann_sync_schemas",
         "rossmann_sync_schemas.*",
     ]),
