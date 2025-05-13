@@ -8,7 +8,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY sync_api ./sync_api
-COPY sync_schemas ./sync_schemas
+COPY rossmann_sync_schemas ./rossmann_sync_schemas
 COPY rossmann_oltp ./rossmann_oltp
 COPY rossmann_oltp_models ./rossmann_oltp_models
 
