@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import Integer, ForeignKey, Index
+from sqlalchemy import Integer, ForeignKey
 
-from rossmann_oltp.models import SyncBase
+from rossmann_oltp_models import SyncBase
 
 
 class CityProduct(SyncBase):

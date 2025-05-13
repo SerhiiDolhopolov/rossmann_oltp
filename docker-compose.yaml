@@ -1,10 +1,19 @@
+#docker network create --driver bridge rossmann-network
+#docker network inspect rossmann-network
+
+networks:
+  rossmann-network:
+    external: true
+
 services:
-  db:
-    container_name: oltp_db
+  oltp_db:
+    container_name: oltp-db
+    networks:
+      - rossmann-network
     image: postgres:latest
     restart: always
     ports:
-      - 2001:5432
+      - 3000:5432
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -15,36 +24,68 @@ services:
       timeout: 5s
       retries: 5
 
-  adminer:
-    container_name: oltp_adminer
-    depends_on:
-      db:
-        condition: service_healthy
-    image: adminer
-    restart: always
-    ports:
-      - 2000:8080
-
-  app:
-    container_name: oltp_app
+  oltp_app:
+    container_name: oltp-app
+    networks:
+      - rossmann-network
     build:
       context: .
       dockerfile: Dockerfile.oltp
     volumes:
       - .:/app
     depends_on:
-      db:
+      oltp_db:
         condition: service_healthy
+    env_file:
+      - .env
 
-  api:
-    container_name: oltp_sync_api
+  oltp_sync_api:
+    container_name: oltp-sync-api
+    networks:
+      - rossmann-network
     build:
       context: .
       dockerfile: Dockerfile.sync_api
     volumes:
       - .:/app
     ports:
-      - 2002:8000
+      - 3001:8000
     depends_on:
-      - app
+      - oltp_app
+
+  oltp_kafka_consumer_1:
+    container_name: oltp-kafka-consumer-1
+    networks:
+      - rossmann-network
+    build:
+      context: .
+      dockerfile: Dockerfile.kafka_consumer
+    volumes:
+      - .:/app
+    depends_on:
+      - oltp_app
+
+  oltp_kafka_consumer_2:
+    container_name: oltp-kafka-consumer-2
+    networks:
+      - rossmann-network
+    build:
+      context: .
+      dockerfile: Dockerfile.kafka_consumer
+    volumes:
+      - .:/app
+    depends_on:
+      - oltp_app
+
+  oltp_kafka_consumer_3:
+    container_name: oltp-kafka-consumer-3
+    networks:
+      - rossmann-network
+    build:
+      context: .
+      dockerfile: Dockerfile.kafka_consumer
+    volumes:
+      - .:/app
+    depends_on:
+      - oltp_app
 

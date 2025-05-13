@@ -5,7 +5,7 @@ from datetime import date, timedelta
 from sqlalchemy.orm import Session
 
 from employee_role import EmployeeRole
-from rossmann_oltp.models import Employee
+from rossmann_oltp_models import Employee
 
 
 def create_employee(db: Session, 

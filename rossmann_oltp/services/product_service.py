@@ -2,8 +2,8 @@ import random
 
 from sqlalchemy.orm import Session
 
-from rossmann_oltp.models import Category, Shop, City
-from rossmann_oltp.models import Product, CityProduct, ShopProduct
+from rossmann_oltp_models import Category, Shop, City
+from rossmann_oltp_models import Product, CityProduct, ShopProduct
 
 
 def create_category(db: Session, name: str, description: str = None):

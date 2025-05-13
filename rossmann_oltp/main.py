@@ -4,7 +4,7 @@ from services.employee_service import create_employee
 from services.product_service import create_product, create_category
 from services.product_service import add_product_to_city, add_product_to_shop
 from employee_role import EmployeeRole
-from rossmann_oltp.models import Category, Shop, City
+from rossmann_oltp_models import Category, Shop, City
 
 
 def main():

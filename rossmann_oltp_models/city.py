@@ -1,7 +1,7 @@
 from sqlalchemy import String, Integer, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from rossmann_oltp.models import Base
+from rossmann_oltp_models import Base
 
 
 class City(Base):

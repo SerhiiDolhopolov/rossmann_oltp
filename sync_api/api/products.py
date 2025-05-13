@@ -1,10 +1,10 @@
 from datetime import datetime
 
 from fastapi import APIRouter, Depends
-from rossmann_oltp.models import Product, CityProduct, Shop
+from rossmann_oltp_models import Product, CityProduct, Shop
 
 from rossmann_oltp.db import get_db
-from rossmann_sync_api.schemas import ProductSchema
+from rossmann_sync_schemas import ProductSchema
 
 
 router = APIRouter(prefix="/products", tags=["products"])

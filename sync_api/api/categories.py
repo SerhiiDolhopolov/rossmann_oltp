@@ -1,10 +1,10 @@
 from datetime import datetime
 
 from fastapi import APIRouter, Depends
-from rossmann_oltp.models import Category
+from rossmann_oltp_models import Category
 
 from rossmann_oltp.db import get_db
-from rossmann_sync_api.schemas import CategorySchema
+from rossmann_sync_schemas import CategorySchema
 
 
 router = APIRouter(prefix="/categories", tags=["categories"])

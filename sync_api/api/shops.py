@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from rossmann_oltp.models import Shop, City, Country
+from rossmann_oltp_models import Shop, City, Country
 
 from rossmann_oltp.db import get_db
-from rossmann_sync_api.schemas import ShopSchema
+from rossmann_sync_schemas import ShopSchema
 
 
 router = APIRouter(prefix="/shops", tags=["shops"])

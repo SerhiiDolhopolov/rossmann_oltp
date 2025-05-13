@@ -1,11 +1,12 @@
-from python:3.13-slim
+FROM python:3.13-slim
 
 WORKDIR /app
 
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+COPY rossmann_oltp ./rossmann_oltp
+COPY rossmann_oltp_models ./rossmann_oltp_models
 
 ENV PYTHONPATH=/app
 

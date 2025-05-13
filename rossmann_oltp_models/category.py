@@ -1,7 +1,7 @@
-from sqlalchemy import String, Index
+from sqlalchemy import String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from rossmann_oltp.models import SyncBase
+from rossmann_oltp_models import SyncBase
 
 
 class Category(SyncBase):

@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 
-from rossmann_oltp.models import Country, City, Shop, Employee, Terminal
+from rossmann_oltp_models import Country, City, Shop, Employee, Terminal
 
 def create_terminal(db: Session, shop: Shop) -> Terminal:
     terminal = Terminal(shop=shop, password='password')
