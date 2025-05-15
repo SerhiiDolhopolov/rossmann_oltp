@@ -3,7 +3,7 @@ from datetime import datetime
 from fastapi import APIRouter, Depends
 from rossmann_oltp_models import Product, CityProduct, Shop
 
-from rossmann_oltp.db import get_db
+from database.db import get_db
 from rossmann_sync_schemas import ProductSchema
 
 

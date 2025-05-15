@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from rossmann_oltp_models import Terminal
 
-from rossmann_oltp.db import get_db
+from database.db import get_db
 
 router = APIRouter(prefix="/terminals", tags=["terminals"])
 

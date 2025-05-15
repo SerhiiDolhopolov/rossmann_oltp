@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from sqlalchemy.orm import Session
 
 from rossmann_oltp_models import ShopProduct
-from rossmann_oltp.config import DATE_TIME_FORMAT
+from database.config import DATE_TIME_FORMAT
 
 
 def update_products_quantity(db: Session,

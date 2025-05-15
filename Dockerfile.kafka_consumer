@@ -6,7 +6,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY kafka_consumer ./kafka_consumer
-COPY rossmann_oltp ./rossmann_oltp
+COPY database ./database
 COPY rossmann_oltp_models ./rossmann_oltp_models
 
 ENV PYTHONPATH=/app

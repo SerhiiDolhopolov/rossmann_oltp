@@ -1,8 +1,8 @@
 import json
 from confluent_kafka import Consumer, KafkaException, KafkaError
-from rossmann_oltp.config import KAFKA_TOPIC_OLTP_UPDATE_PRODUCT_QUANTITY, KAFKA_HOST, KAFKA_PORT
-from rossmann_oltp.services.sync_service import update_products_quantity
-from rossmann_oltp.db import get_db
+from database.config import KAFKA_TOPIC_OLTP_UPDATE_PRODUCT_QUANTITY, KAFKA_HOST, KAFKA_PORT
+from database.services.sync_service import update_products_quantity
+from database.db import get_db
 
 
 def consume_messages(topic_handlers: dict[str, callable]):

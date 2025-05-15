@@ -3,7 +3,7 @@ from pydantic import EmailStr
 from sqlalchemy.orm import Session
 from rossmann_oltp_models import Employee
 
-from rossmann_oltp.db import get_db
+from database.db import get_db
 from rossmann_sync_schemas import EmployeeSchema
 
 

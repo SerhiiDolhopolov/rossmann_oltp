@@ -5,9 +5,9 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY rossmann_oltp ./rossmann_oltp
+COPY database ./database
 COPY rossmann_oltp_models ./rossmann_oltp_models
 
 ENV PYTHONPATH=/app
 
-CMD ["python", "-u", "rossmann_oltp/main.py"]
+CMD ["python", "-u", "database/main.py"]

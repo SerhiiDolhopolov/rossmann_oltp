@@ -199,7 +199,7 @@ def create_products_baby(db, category: Category, cities: list[City], shops: list
     baby_products = {
         'Set of 6 balancing stones': (
             'A set of 6 balancing stones in different colors and shapes. Perfect for developing fine motor skills and creativity in children.',
-            'products-images/Set_of_6_balancing_stones.webp',
+            'product-images/Set_of_6_balancing_stones.webp',
             {
                 'Berlin': (16.99, 0.1),
                 'Nurnberg': (15.99, 0.05),
@@ -208,7 +208,7 @@ def create_products_baby(db, category: Category, cities: list[City], shops: list
         ),
         'Water ball track': (
             'A water ball track that allows children to play with water and balls. It helps develop hand-eye coordination and fine motor skills.',
-            'products-images/Water_ball_track.webp',
+            'product-images/Water_ball_track.webp',
             {
                 'Berlin': (9.99, 0),
                 'Nurnberg': (9.49, 0),
@@ -217,7 +217,7 @@ def create_products_baby(db, category: Category, cities: list[City], shops: list
         ),
         'Foldable toilet seat duck': (
             'A foldable toilet seat in the shape of a duck. It is easy to carry and use, making it perfect for potty training on the go.',
-            'products-images/Foldable_toilet_seat_duck.webp',
+            'product-images/Foldable_toilet_seat_duck.webp',
             {
                 'Berlin': (7.99, 0.2),
                 'Nurnberg': (7.99, 0.2),
@@ -226,7 +226,7 @@ def create_products_baby(db, category: Category, cities: list[City], shops: list
         ),
         'Diapers Extra Soft Premium Junior Size 5 (11-16 kg)': (
             'Extra soft diapers for children weighing 11-16 kg. They provide comfort and protection for your baby.',
-            'products-images/Diapers.webp',
+            'product-images/Diapers.webp',
             {
                 'Berlin': (12.99, 0.1),
                 'Nurnberg': (11.99, 0.1),
@@ -240,7 +240,7 @@ def create_products_health(db, category: Category, cities: list[City], shops: li
     health_products = {
         'Super-Haftcreme Neutral': (
             'Super adhesive cream for dentures. Provides a strong hold and comfort for denture wearers.',
-            'products-images/Super_haftcreme_neutral.webp',
+            'product-images/Super_haftcreme_neutral.webp',
             {
                 'Berlin': (1.59, 0),
                 'Nurnberg': (1.59, 0),
@@ -249,7 +249,7 @@ def create_products_health(db, category: Category, cities: list[City], shops: li
         ),
         'EZB 6100 Electric Toothbrush': (
             'An electric toothbrush with a 2-minute timer and 30-second interval timer. It helps you brush your teeth effectively.',
-            'products-images/EZB_6100_electric_toothbrush.webp',
+            'product-images/EZB_6100_electric_toothbrush.webp',
             {
                 'Berlin': (89.99, 0.05),
                 'Nurnberg': (84.99, 0.1),
@@ -258,7 +258,7 @@ def create_products_health(db, category: Category, cities: list[City], shops: li
         ),
         'Rapid Alcohol Test': (
             'A rapid alcohol test that provides quick results. It is easy to use and helps you check your blood alcohol level.',
-            'products-images/Rapid_alcohol_test.webp',
+            'product-images/Rapid_alcohol_test.webp',
             {
                 'Berlin': (6.99, 0),
                 'Nurnberg': (6.99, 0),
@@ -272,7 +272,7 @@ def create_products_household(db, category: Category, cities: list[City], shops:
     household_products = {
         'Universal detergent liquid fresh cotton blossom 20 WL': (
             'A universal detergent liquid with a fresh cotton blossom scent. It is suitable for all types of fabrics and provides a deep clean.',
-            'products-images/Universal_detergent_liquid.webp',
+            'product-images/Universal_detergent_liquid.webp',
             {
                 'Berlin': (5.49, 0),
                 'Nurnberg': (5.49, 0),
@@ -281,7 +281,7 @@ def create_products_household(db, category: Category, cities: list[City], shops:
         ),
         'Fabric softener concentrate Aprilfrisch 59 WL': (
             'A fabric softener concentrate with an April fresh scent. It provides long-lasting freshness and softness to your laundry.',
-            'products-images/Fabric_softener.webp',
+            'product-images/Fabric_softener.webp',
             {
                 'Berlin': (3.29, 0),
                 'Nurnberg': (3.29, 0),
@@ -290,7 +290,7 @@ def create_products_household(db, category: Category, cities: list[City], shops:
         ),
         'All-purpose cleaner spray bathroom': (
             'An all-purpose cleaner spray for the bathroom. It effectively removes dirt and limescale, leaving your bathroom clean and fresh.',
-            'products-images/All_purpose_cleaner.webp',
+            'product-images/All_purpose_cleaner.webp',
             {
                 'Berlin': (3.29, 0),
                 'Nurnberg': (3.29, 0),
@@ -304,7 +304,7 @@ def create_products_decor(db, category: Category, cities: list[City], shops: lis
     decor_products = {
         'PopGrip Premium Glitter Rainbow Void': (
             'A PopGrip with a premium glitter design. It provides a secure grip for your phone and can be used as a stand.',
-            'products-images/PopGrip_premium_glitter.webp',
+            'product-images/PopGrip_premium_glitter.webp',
             {
                 'Berlin': (17.99, 0),
                 'Nurnberg': (16.99, 0),
@@ -313,7 +313,7 @@ def create_products_decor(db, category: Category, cities: list[City], shops: lis
         ),
         'LED starry sky light green': (
             'A LED light that creates a starry sky effect. It is perfect for creating a relaxing atmosphere in your home.',
-            'products-images/LED_starry.webp',
+            'product-images/LED_starry.webp',
             {
                 'Berlin': (7.99, 0),
                 'Nurnberg': (7.99, 0),
@@ -327,7 +327,7 @@ def create_products_care(db, category: Category, cities: list[City], shops: list
     care_products = {
         'Beauty Scrub Blueberry Caramel Bliss': (
             'A beauty scrub with a blueberry caramel scent. It exfoliates and nourishes your skin',
-            'products-images/Beauty_scrub.webp',
+            'product-images/Beauty_scrub.webp',
             {
                 'Berlin': (7.99, 0.35),
                 'Nurnberg': (7.49, 0.35),
@@ -336,7 +336,7 @@ def create_products_care(db, category: Category, cities: list[City], shops: list
         ),
         'Anti-Gray Effect Coloring Conditioner': (
             'A coloring conditioner that helps reduce gray hair. It provides a natural color and shine to your hair.',
-            'products-images/Anti_gray.webp',
+            'product-images/Anti_gray.webp',
             {
                 'Berlin': (15.99, 0.2),
                 'Nurnberg': (13.99, 0.2),
