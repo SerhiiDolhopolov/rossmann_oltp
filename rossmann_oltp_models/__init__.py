@@ -8,5 +8,3 @@ from .product import Product
 from .shop_product import ShopProduct
 from .city_product import CityProduct
 from .terminal import Terminal
-
-from .config import Config
