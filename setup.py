@@ -10,7 +10,7 @@ setup(
         "rossmann_sync_schemas.*",
     ]),
     install_requires=[
-        "fastapi",
+        "fastapi[standard]",
         "sqlalchemy"
     ]
 )
