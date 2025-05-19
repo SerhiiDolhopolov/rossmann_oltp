@@ -13,5 +13,6 @@ class SyncBase(Base):
     __abstract__ = True
 
     last_updated_utc: Mapped[datetime] = mapped_column(default=datetime.now(timezone.utc).strftime(DATE_TIME_FORMAT),
-                                                       index=True)
+                                                       index=True,
+                                                       onupdate=datetime.now(timezone.utc).strftime(DATE_TIME_FORMAT))
     is_deleted: Mapped[bool] = mapped_column(default=False, index=True)

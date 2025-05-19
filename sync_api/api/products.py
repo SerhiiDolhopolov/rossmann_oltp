@@ -15,13 +15,13 @@ async def sync_products(shop_id: int,
                         sync_utc_time: datetime,
                         db=Depends(get_db)):
     products = db.query(Product, CityProduct) \
-                .join(CityProduct, CityProduct.product_id == Product.product_id) \
-                .join(Shop, Shop.city_id == CityProduct.city_id) \
-                .filter(
+                 .join(CityProduct, CityProduct.product_id == Product.product_id) \
+                 .join(Shop, Shop.city_id == CityProduct.city_id) \
+                 .filter(
                     Product.last_updated_utc >= sync_utc_time,
                     Shop.shop_id == shop_id,
                     ) \
-                .all()
+                 .all()
     result = [
         ProductSchema(
             product_id=product.product_id,
