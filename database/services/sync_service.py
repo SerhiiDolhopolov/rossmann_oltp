@@ -3,7 +3,6 @@ from datetime import datetime, timezone
 from sqlalchemy.orm import Session
 
 from rossmann_oltp_models import ShopProduct
-from database.config import DATE_TIME_FORMAT
 
 
 def update_products_quantity(
@@ -24,7 +23,7 @@ def update_products_quantity(
         ).update(
             {
                 "stock_quantity": quantity,
-                "updated_at_utc": datetime.now(timezone.utc).strftime(DATE_TIME_FORMAT),
+                "updated_at_utc": datetime.now(timezone.utc),
             }
         )
     db.commit()

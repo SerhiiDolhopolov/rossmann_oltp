@@ -3,7 +3,7 @@ import os
 from sqlalchemy import create_engine, inspect
 from sqlalchemy.orm import sessionmaker
 
-from rossmann_oltp_models import Base
+from rossmann_oltp_models import Base, Shop
 from database.config import OLTP_USER, OLTP_PASSWORD, OLTP_DB, OLTP_HOST, OLTP_PORT
 
 DATABASE_URL = (
@@ -22,14 +22,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 def init_db():
     Base.metadata.create_all(bind=engine)
-    wait_for_tables(engine, ["products", "categories",
-                    "city_products", "employees"])
-    triggers_path = os.path.join(os.path.dirname(__file__), "triggers.sql")
-    with open(triggers_path, "r", encoding="utf-8") as file:
-        sql = file.read()
-    with engine.connect() as connection:
-        connection.exec_driver_sql(sql)
-        connection.commit()
+    create_triggers(engine)
 
 
 def get_db():
@@ -38,6 +31,26 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+def create_triggers(engine):
+    wait_for_tables(engine, [
+        "products", "categories", "city_products", "employees"
+    ])
+
+    db = next(get_db())
+    try:
+        if db.query(Shop).count() > 0:
+            return
+    finally:
+        db.close()
+
+    triggers_path = os.path.join(os.path.dirname(__file__), "triggers.sql")
+    with open(triggers_path, "r", encoding="utf-8") as file:
+        sql = file.read()
+    with engine.connect() as connection:
+        connection.exec_driver_sql(sql)
+        connection.commit()
 
 
 def wait_for_tables(engine, table_names):

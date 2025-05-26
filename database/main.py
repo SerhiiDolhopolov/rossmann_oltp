@@ -8,11 +8,11 @@ from rossmann_oltp_models import Category, Shop, City
 
 
 def main():
+    init_db()
     db = next(get_db())
     try:
         if db.query(Shop).count() > 0:
             return
-        init_db()
         create_start_data()
     finally:
         db.close()
@@ -396,7 +396,7 @@ def add_products(
                 db, product, city, map_price[city.city_name][0], map_price[city.city_name][1]
             )
         for shop in shops:
-            add_product_to_shop(db, product, shop, 0)
+            add_product_to_shop(db, product, shop)
 
 
 if __name__ == "__main__":

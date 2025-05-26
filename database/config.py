@@ -3,8 +3,6 @@ import os
 
 load_dotenv()
 
-DATE_TIME_FORMAT = os.getenv("DATE_TIME_FORMAT", "%Y-%m-%d %H:%M:%S")
-
 OLTP_USER = os.getenv("OLTP_USER")
 OLTP_PASSWORD = os.getenv("OLTP_PASSWORD")
 OLTP_HOST = os.getenv("OLTP_HOST")

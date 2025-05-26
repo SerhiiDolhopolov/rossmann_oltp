@@ -1,3 +1,8 @@
+DROP TRIGGER IF EXISTS trigger_update_last_updated_utc_products ON products;
+DROP TRIGGER IF EXISTS trigger_update_last_updated_utc_categories ON categories;
+DROP TRIGGER IF EXISTS trigger_update_last_updated_utc_city_products ON city_products;
+DROP TRIGGER IF EXISTS trigger_update_last_updated_utc_employees ON employees;
+
 CREATE OR REPLACE FUNCTION update_last_updated_utc()
 RETURNS TRIGGER AS $$
 BEGIN

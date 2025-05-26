@@ -16,7 +16,7 @@ def create_employee(
 ) -> Employee:
     birth_date = date.today() - timedelta(days=random.randint(20, 60) * 365)
     hire_date = date.today() - timedelta(days=random.randint(0, 365 * 5))
-    phone = "+15454545454"
+    phone = '+1' + ''.join([str(random.randint(0, 9)) for i in range(9)])
     email = f"{first_name.lower()}.{last_name.lower()}@example.com"
     password = "password"
 

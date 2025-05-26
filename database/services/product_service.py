@@ -58,7 +58,7 @@ def add_product_to_shop(
     db: Session,
     product: Product,
     shop: Shop,
-    stock_quantity: int,
+    stock_quantity: int = 0,
 ) -> ShopProduct:
     shop_product = ShopProduct(
         shop=shop,
