@@ -27,7 +27,6 @@ class Product(SyncBase):
         unique=True,
         nullable=False,
     )
-
     description: Mapped[str | None] = mapped_column(
         String(2048),
         nullable=True,

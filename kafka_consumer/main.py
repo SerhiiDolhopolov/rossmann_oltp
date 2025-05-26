@@ -23,6 +23,7 @@ def consume_messages(topic_handlers: dict[str, callable]):
                 "bootstrap.servers": f"{KAFKA_HOST}:{KAFKA_PORT}",
                 "group.id": "rossmann-oltp-group",
                 "auto.offset.reset": "latest",
+                "logger": logging.getLogger("confluent_kafka"),
             }
         )
         topics = list(topic_handlers.keys())

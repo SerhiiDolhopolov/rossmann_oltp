@@ -17,6 +17,7 @@ class Terminal(Base):
         ForeignKey("shops.shop_id", ondelete="RESTRICT"),
         nullable=False,
     )
+
     password: Mapped[str] = mapped_column(
         String(100),
         nullable=False,
