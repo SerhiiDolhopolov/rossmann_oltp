@@ -11,4 +11,4 @@ COPY rossmann_oltp_models ./rossmann_oltp_models
 
 ENV PYTHONPATH=/app
 
-CMD ["python", "-u", "kafka_consumer/consumer.py"]
+CMD ["python", "-u", "kafka_consumer/main.py"]

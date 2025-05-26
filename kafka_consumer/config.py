@@ -5,10 +5,15 @@ import logging.config
 
 from dotenv import load_dotenv
 
-
 load_dotenv()
 
-KAFKA_CONSUMER_LOGGING_CONFIG = os.getenv("KAFKA_CONSUMER_LOGGING_CONFIG")
+ENV = os.getenv("ENV", "development").lower()
+
+KAFKA_CONSUMER_LOGGING_CONFIG = (
+    "kafka_consumer/logging_config.prod.json"
+    if ENV == "production"
+    else "kafka_consumer/logging_config.dev.json"
+)
 CONSUMER_ID = os.getenv("CONSUMER_ID")
 
 

@@ -21,7 +21,7 @@
     },
     "file": {
       "class": "logging.handlers.RotatingFileHandler",
-      "level": "INFO",
+      "level": "WARNING",
       "formatter": "json",
       "filename": "kafka_consumer/logs/app-{CONSUMER_ID}.log",
       "maxBytes": 10485760,

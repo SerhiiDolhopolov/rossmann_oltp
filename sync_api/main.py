@@ -7,7 +7,6 @@ from sync_api.api.products import router as products_router
 from sync_api.api.shops import router as shops_router
 from sync_api.api.terminal import router as terminal_router
 
-
 app = FastAPI()
 app.include_router(employees_router)
 app.include_router(categories_router)
