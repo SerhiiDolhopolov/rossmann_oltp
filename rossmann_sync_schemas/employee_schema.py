@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from employee_role import EmployeeRole
+from rossmann_sync_schemas.employee_role import EmployeeRole
 
 
 class EmployeeSchema(BaseModel):
@@ -25,6 +25,6 @@ class EmployeeSchema(BaseModel):
                 "employee_id": 1,
                 "first_name": "Steve",
                 "last_name": "Jobs",
-                "role": EmployeeRole.MANAGER,
+                "role": EmployeeRole.CASHIER,
             }
         }
