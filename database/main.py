@@ -8,15 +8,18 @@ from rossmann_oltp_models import Category, Shop, City
 
 
 def main():
-    init_db()
-    create_start_data()
-
-def create_start_data():
     db = next(get_db())
     try:
         if db.query(Shop).count() > 0:
             return
-        
+        init_db()
+        create_start_data()
+    finally:
+        db.close()
+
+def create_start_data():
+    db = next(get_db())
+    try:        
         country_a_b = create_country(db, 'Germany')
         country_c = create_country(db, 'Spain')
         city_a = create_city(db, country_a_b, 'Berlin')

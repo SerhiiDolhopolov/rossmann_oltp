@@ -64,6 +64,8 @@ services:
       - .:/app
     depends_on:
       - oltp_app
+    environment:
+      - CONSUMER_ID=1
 
   oltp_kafka_consumer_2:
     container_name: oltp-kafka-consumer-2
@@ -76,6 +78,8 @@ services:
       - .:/app
     depends_on:
       - oltp_app
+    environment:
+      - CONSUMER_ID=2
 
   oltp_kafka_consumer_3:
     container_name: oltp-kafka-consumer-3
@@ -88,4 +92,6 @@ services:
       - .:/app
     depends_on:
       - oltp_app
+    environment:
+      - CONSUMER_ID=3
 

@@ -1,6 +1,7 @@
 <!-- omit in toc -->
 ## Languages
 [![python](https://img.shields.io/badge/python-3.11-d6123c?color=white&labelColor=d6123c&logo=python&logoColor=white)](#)
+[![SQL](https://img.shields.io/badge/SQL-d6123c?color=white&labelColor=d6123c)](#)
 
 ## Frameworks
 [![sqlalchemy](https://img.shields.io/badge/sqlalchemy-2.0.41-d6123c?color=white&labelColor=d6123c&logo=sqlalchemy&logoColor=white)](#)
