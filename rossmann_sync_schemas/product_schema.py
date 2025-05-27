@@ -4,7 +4,7 @@ from rossmann_sync_schemas import ProductDescSchema
 
 class ProductSchema(ProductDescSchema):
     price: float = Field(
-        gt=0,
+        ge=0,
         description="Product price",
     )
     discount: float = Field(
