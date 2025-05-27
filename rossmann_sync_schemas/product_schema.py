@@ -24,7 +24,7 @@ class ProductSchema(ProductDescSchema):
                 "category_id": 3,
                 "price": 5.99,
                 "discount": 0.1,
-                "updated_at_utc": "2023-10-01T12:00:00Z",
+                "last_updated_utc": "2023-10-01T12:00:00Z",
                 "is_deleted": False
             }
         }

@@ -33,6 +33,6 @@ class ProductDescSchema(SyncModel):
             "description": "Latest model smartphone",
             "barcode": "123456789012",
             "category_id": 1,
-            "updated_at_utc": "2023-10-01T12:00:00Z",
+            "last_updated_utc": "2023-10-01T12:00:00Z",
             "is_deleted": False
         }}

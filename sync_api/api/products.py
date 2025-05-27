@@ -20,7 +20,7 @@ async def sync_products(
         .join(CityProduct, CityProduct.product_id == Product.product_id)
         .join(Shop, Shop.city_id == CityProduct.city_id)
         .filter(
-            Product.last_updated_utc >= sync_utc_time,
+            Product.last_updated_utc > sync_utc_time,
             Shop.shop_id == shop_id,
         )
         .all()
@@ -35,6 +35,7 @@ async def sync_products(
             price=city_product.price,
             discount=city_product.discount,
             is_deleted=product.is_deleted,
+            last_updated_utc=city_product.last_updated_utc,
         )
         for product, city_product in products
     ]

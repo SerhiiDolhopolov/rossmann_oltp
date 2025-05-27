@@ -24,7 +24,7 @@ class CategorySchema(SyncModel):
                 "category_id": 1,
                 "name": "Electronics",
                 "description": "Devices and gadgets",
-                "updated_at_utc": "2023-10-01T12:00:00Z",
+                "last_updated_utc": "2023-10-01T12:00:00Z",
                 "is_deleted": False,
             }
         }

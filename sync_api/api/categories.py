@@ -16,7 +16,7 @@ async def sync_categories(
 ):
     categories = (
         db.query(Category)
-        .filter(Category.last_updated_utc >= sync_utc_time)
+        .filter(Category.last_updated_utc > sync_utc_time)
         .all()
     )
     return categories
