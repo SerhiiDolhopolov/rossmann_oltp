@@ -1,7 +1,9 @@
-from pydantic import BaseModel, Field
+from pydantic import Field
+
+from rossmann_sync_schemas import SyncModel
 
 
-class ProductDescSchema(BaseModel):
+class ProductDescSchema(SyncModel):
     product_id: int = Field(
         ge=1,
         description="Unique identifier for the product",
@@ -23,10 +25,6 @@ class ProductDescSchema(BaseModel):
         ge=1,
         description="Identifier of the associated category",
     )
-    is_deleted: bool = Field(
-        default=False,
-        description="Soft deletion flag",
-    )
 
     class Config:
         json_schema_extra = {"example": {
@@ -35,5 +33,6 @@ class ProductDescSchema(BaseModel):
             "description": "Latest model smartphone",
             "barcode": "123456789012",
             "category_id": 1,
+            "updated_at_utc": "2023-10-01T12:00:00Z",
             "is_deleted": False
         }}

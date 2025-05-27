@@ -1,3 +1,4 @@
+from .sync_model import SyncModel
 from .employee_schema import EmployeeSchema
 from .category_schema import CategorySchema
 from .product_desc_schema import ProductDescSchema

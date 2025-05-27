@@ -3,27 +3,6 @@ from rossmann_sync_schemas import ProductDescSchema
 
 
 class ProductSchema(ProductDescSchema):
-    product_id: int = Field(
-        ge=1,
-        description="Unique identifier for the product",
-    )
-    name: str = Field(
-        max_length=255,
-        description="Product name",
-    )
-    description: str | None = Field(
-        default=None,
-        max_length=2048,
-        description="Optional product description",
-    )
-    barcode: str = Field(
-        max_length=12,
-        description="Product barcode",
-    )
-    category_id: int = Field(
-        ge=1,
-        description="Unique identifier for the product category",
-    )
     price: float = Field(
         gt=0,
         description="Product price",
@@ -33,10 +12,6 @@ class ProductSchema(ProductDescSchema):
         ge=0,
         le=1,
         description="Discount on the product as a fraction (0 to 1)",
-    )
-    is_deleted: bool = Field(
-        default=False,
-        description="Soft deletion flag",
     )
 
     class Config:
@@ -49,6 +24,7 @@ class ProductSchema(ProductDescSchema):
                 "category_id": 3,
                 "price": 5.99,
                 "discount": 0.1,
+                "updated_at_utc": "2023-10-01T12:00:00Z",
                 "is_deleted": False
             }
         }

@@ -1,7 +1,9 @@
-from pydantic import BaseModel, Field
+from pydantic import Field
+
+from rossmann_sync_schemas import SyncModel
 
 
-class CategorySchema(BaseModel):
+class CategorySchema(SyncModel):
     category_id: int = Field(
         ge=1,
         description="Unique identifier for the category",
@@ -15,17 +17,14 @@ class CategorySchema(BaseModel):
         max_length=2048,
         description="Optional category description",
     )
-    is_deleted: bool = Field(
-        default=False,
-        description="Soft deletion flag",
-    )
-
+    
     class Config:
         json_schema_extra = {
             "example": {
                 "category_id": 1,
                 "name": "Electronics",
                 "description": "Devices and gadgets",
+                "updated_at_utc": "2023-10-01T12:00:00Z",
                 "is_deleted": False,
             }
         }
