@@ -19,4 +19,14 @@ async def sync_categories(
         .filter(Category.last_updated_utc > sync_utc_time)
         .all()
     )
-    return categories
+    result = [
+        CategorySchema(
+            category_id=category.category_id,
+            name=category.name,
+            description=category.description,
+            is_deleted=category.is_deleted,
+            updated_at_utc=category.last_updated_utc,
+        )
+        for category in categories
+    ]
+    return result

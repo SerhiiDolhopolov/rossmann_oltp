@@ -35,7 +35,7 @@ async def sync_products(
             price=city_product.price,
             discount=city_product.discount,
             is_deleted=product.is_deleted,
-            last_updated_utc=city_product.last_updated_utc,
+            updated_at_utc=city_product.last_updated_utc,
         )
         for product, city_product in products
     ]

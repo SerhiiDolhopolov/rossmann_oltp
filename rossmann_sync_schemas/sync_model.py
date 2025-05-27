@@ -7,7 +7,7 @@ class SyncModel(BaseModel):
         default=False,
         description="Soft deletion flag",
     )
-    last_updated_utc: datetime = Field(
-        description="Last updated timestamp in UTC",
+    updated_at_utc: datetime = Field(
+        description="When was updated timestamp in UTC",
     )
     
