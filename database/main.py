@@ -36,9 +36,11 @@ def create_start_data():
         )
         shop_a = create_shop_a(db, city_a)
         shop_b = create_shop_b(db, city_b)
-        shop_c = create_shop_c(db, city_c)
+        shop_c = create_shop_c(db, city_b)
+        shop_d = create_shop_d(db, city_c)
+        shop_e = create_shop_e(db, city_c)
         categories = create_categories(db)
-        shops = [shop_a, shop_b, shop_c]
+        shops = [shop_a, shop_b, shop_c, shop_d, shop_e]
         for shop in shops:
             for i in range(1, 4):
                 create_terminal(
@@ -163,7 +165,85 @@ def create_shop_c(db, city: City) -> Shop:
     return create_shop(
         db=db,
         city=city,
+        address="Fürther Str. 187 90429 Nürnberg",
+        employees=employees,
+    )
+    
+
+def create_shop_d(db, city: City) -> Shop:
+    employees = [
+        create_employee(
+            db=db,
+            first_name="Petyr",
+            last_name="Baelish",
+            role=EmployeeRole.ADMIN,
+            salary=1400,
+        ),
+        create_employee(
+            db=db,
+            first_name="Brienne",
+            last_name="Tarth",
+            role=EmployeeRole.CASHIER,
+            salary=350,
+        ),
+        create_employee(
+            db=db,
+            first_name="Jorah",
+            last_name="Mormont",
+            role=EmployeeRole.CASHIER,
+            salary=360,
+        ),
+        create_employee(
+            db=db,
+            first_name="Theon",
+            last_name="Greyjoy",
+            role=EmployeeRole.CASHIER,
+            salary=310,
+        ),
+    ]
+    return create_shop(
+        db=db,
+        city=city,
         address="Av. Sorolla, s/n, 03530 La Nucia, Alicante",
+        employees=employees,
+    )
+    
+
+def create_shop_e(db, city: City) -> Shop:
+    employees = [
+        create_employee(
+            db=db,
+            first_name="Samwell",
+            last_name="Tarly",
+            role=EmployeeRole.ADMIN,
+            salary=1400,
+        ),
+        create_employee(
+            db=db,
+            first_name="Bronn",
+            last_name="Blackwater",
+            role=EmployeeRole.CASHIER,
+            salary=350,
+        ),
+        create_employee(
+            db=db,
+            first_name="Sandor",
+            last_name="Clegane",
+            role=EmployeeRole.CASHIER,
+            salary=360,
+        ),
+        create_employee(
+            db=db,
+            first_name="Gendry",
+            last_name="Waters",
+            role=EmployeeRole.CASHIER,
+            salary=310,
+        ),
+    ]
+    return create_shop(
+        db=db,
+        city=city,
+        address="Ctra. Benidorm-La Nucia, S/N-Pza.Del Sol, 03530 La Nucia",
         employees=employees,
     )
 
