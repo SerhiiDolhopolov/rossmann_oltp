@@ -30,7 +30,7 @@ services:
       - rossmann-network
     build:
       context: .
-      dockerfile: Dockerfile.app
+      dockerfile: Dockerfile.database
     volumes:
       - .:/app
     depends_on:
