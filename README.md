@@ -25,9 +25,9 @@
 - [Next Section of the Project](#next-section-of-the-project)
 
 ## Introduction
-🟢 **This is part 2 of 7 Docker sections in the [🔴 Supermarket Simulation Project](https://github.com/SerhiiDolhopolov/rossmann_services).**
+🟢 **This is part 2 of 7 Docker sections in the 🔴 [Supermarket Simulation Project](https://github.com/SerhiiDolhopolov/rossmann_services).**
 
-[🔵 **<- Preview part with an introduction.**](https://github.com/SerhiiDolhopolov/rossmann_services)
+🔵 [**<- Preview part with an introduction.**](https://github.com/SerhiiDolhopolov/rossmann_services)
 
 ## Project Workflow
 This section contains the general OLTP database. The database is created using the [SQLAlchemy](https://www.sqlalchemy.org/) ORM. It is designed to synchronize with local store databases:
@@ -50,6 +50,10 @@ This section contains the general OLTP database. The database is created using t
       - `admin`
 
 ## Database Schema
+The schema was created at [chartdb.io](https://chartdb.io/)
+
+The database also has triggers to update **last_updated_utc**.
+
 ![OLTP Schema](images/oltp_db.png)
 
 ## Getting Started
