@@ -21,6 +21,8 @@
 - [Project Workflow](#project-workflow)
 - [Docker Containers](#docker-containers)
 - [Database Schema](#database-schema)
+- [Sync API](#sync-api)
+- [Kafka Consumer](#kafka-consumer)
 - [Getting Started](#getting-started)
 - [Next Section of the Project](#next-section-of-the-project)
 
@@ -50,11 +52,17 @@ This section contains the general OLTP database. The database is created using t
       - `admin`
 
 ## Database Schema
-The schema was created at [chartdb.io](https://chartdb.io/)
+The schema was created at [chartdb.io](https://chartdb.io/).
 
 The database also has triggers to update **last_updated_utc**.
 
 ![OLTP Schema](images/oltp_db.png)
+
+## Sync API
+The sync API for starting synchronization of offline markets is implemented via [FastAPI](https://fastapi.tiangolo.com/). The [Pydantic](https://docs.pydantic.dev/latest/) schemas are placed in a separate module so that offline stores can easily validate [Kafka](https://kafka.apache.org/) messages using them.
+
+## Kafka Consumer
+Three Kafka consumers receive messages from the topic **oltp_update_product_quantity** using shop_id as a key. Kafka consumers are implemented via [confluent-kafka](https://www.confluent.io/).
 
 ## Getting Started
 **To start:**
