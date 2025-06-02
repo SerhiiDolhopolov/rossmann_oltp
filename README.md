@@ -49,7 +49,7 @@ It is designed to synchronize with local store databases:
     - Other:
       - `admin`
   - **Database init app**
-  - **Three Kafka consumers**
+  - [**Three Kafka consumers**](https://kafka.apache.org/)
   - **Sync API**
     - 🌐 Web interface:
       - [localhost:3100](http://localhost:3100)
@@ -69,7 +69,7 @@ Three Kafka consumers receive messages from the topic **oltp_update_product_quan
 
 ## Getting Started
 **To start:**
-1. Complete all steps in the [preview part](https://github.com/SerhiiDolhopolov/rossmann_services).
+1. Complete all steps in the [main part](https://github.com/SerhiiDolhopolov/rossmann_services).
 2. Run the services:
 ```bash
 docker compose up --build
