@@ -32,8 +32,9 @@
 🔵 [**<- Preview part with an introduction.**](https://github.com/SerhiiDolhopolov/rossmann_services)
 
 ## Project Workflow
-This section contains the general OLTP database. The database is created using the [SQLAlchemy](https://www.sqlalchemy.org/) ORM. It is designed to synchronize with local store databases:
+This section contains the general OLTP database. The database is created using the [SQLAlchemy](https://www.sqlalchemy.org/) ORM. 
 
+It is designed to synchronize with local store databases:
 - The **last_updated_utc** attribute helps implement Kafka's idempotency mechanism, ensuring that old data does not overwrite new data.
 - The **updated_at_utc** attribute indicates when the product quantity was last synchronized from a local shop.
 - The **is_deleted** attribute is used for soft deletion to maintain data consistency. Since the tables with product information contain little data, column overhead is not significant.
